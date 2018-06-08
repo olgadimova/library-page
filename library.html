@@ -114,11 +114,33 @@ function showForm() {
 function showAll() {
   document.querySelector("#allBooks").innerHTML = myLibrary.map((item, i) => {
   return `<li>
-  <input type="checkbox" data-index=${i} id="item${i}" />
+  <input class="check" type="checkbox" data-index=${i} id="item${i}" checked />
   <label for="item${i}">${item.bookTitle} by ${item.bookAuthor}</label>
+  <input type="button" data-index=${i} id="item${i}" value="delete" onclick="checkDelete()"/>
   </li>`
   }).join('');
 }
+
+function checkDelete() {
+  const checkbox = document.getElementsByClassName('check');
+  const myLibraryIndex = myLibrary.indexOf(i);
+  if(checkbox.checked = true && myLibraryIndex >= 0)  {
+    myLibrary.splice(i, 1);
+  } 
+}
+
+
+
+/*function removeBook(e) {
+  if(!e.target.matches('input.check')) return;
+
+  /*if(input.check.e.checked) {
+    myLibrary.splice(i, 1);
+  }
+
+}*/ 
+
+
 
 addButton.addEventListener('click', addBookToLibrary);
 formButton.addEventListener('click', showForm);

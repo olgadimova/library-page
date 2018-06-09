@@ -99,6 +99,7 @@ function addBookToLibrary(e) {
     bookAuthor
   };
   myLibrary.push(item);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function showForm() {

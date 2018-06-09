@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Library</title>
-
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto" rel="stylesheet">
   <style>
   html { 
   height: 100%;
@@ -11,7 +11,8 @@
    justify-content: center;
    align-items: center;
    text-align: center;
-   font-family: Arial, Helvetica, sans-serif;
+   font-family: 'Lobster', cursive;
+   font-size: 20px;
    margin: auto;
    }
 
@@ -21,77 +22,73 @@
    }
 
    .content {
-
-     align-items: center;
+    align-items: center;
    text-align: center;
    margin-left: 20%;
    margin-right: 20%;
    margin-top: 20%;
    margin-bottom: 20%;
+   font-family: 'Roboto', sans-serif;
    }
 
-div.full_form {
-  border: 1px solid darkred;
-}
-#allBooks {
+
+  div.full_form {
+  border: 2px dashed darkred;
+  }
+  #allBooks {
   list-style: inside square;
-  list-style-type: none;
+  list-style-type: decimal;
   font-size: 20px;
   margin-top: 20px;
-}
+  padding-left: 0px;
+  }
 
-form.library_form {
+  #allBooks li {
+  text-align: center;
+  }
+
+  form.library_form {
   display: none;
-  max-width: 350px;
   text-align: center;
   justify-content: center;
   align-items: center;
-}
+  }
 
-input {
+  input {
   background-color: white;
   text-align: center;
-}
+  }
 </style>
 
 </head>
 <body>
-    <div class="content">
-
-  
-    <h1>Welcome to my library!</h1> 
-
-  
-<div class = "full_form">
+<div class="content">
+  <h1>Welcome to my library!</h1> 
+  <div class = "full_form">
     <p>Check the books out here:</p>
 
-<form class="library_form">
+    <form class="library_form">
   <label  name="title">Title</label>
   <input  id="booktitle" name ="title" type="text" required> <br>
   <label  name="author">Author</label>
   <input  id="bookauthor" name ="author" type="text" required> <br>
-</form>
+    </form>
 
-<button id="form_button" for="library_form" value="ShowForm" type="submit">Show Form</button>
-<input id = "addButton" type = "button" value="Add" /> 
-<input id="allButton" type = "button" value="All" onclick="showAll(myLibrary)"/>
+  <button id="form_showbutton" for="library_form" value="ShowForm" type="submit">Show Form</button>
+  <button id="form_hidebutton" for="library_form" value="HideForm" type="submit">Hide Form</button>
+  <input id = "addButton" type = "button" value="Add" /> 
+  <input id="allButton" type = "button" value="All" onclick="showAll(myLibrary)"/>
 
-
-<ul id = "allBooks"></ul>
-</div>
+  <ul id = "allBooks"></ul>
+  </div>
 
 </div> 
-
 
 <script>
 const myLibrary = [];
 const addButton = document.getElementById("addButton");
-const formButton = document.getElementById('form_button');
-
-/* function Book () {
-    
-  }
- */
+const formShowButton = document.getElementById('form_showbutton');
+const formHideButton = document.getElementById('form_hidebutton');
 
 function addBookToLibrary(e) {
   e.preventDefault();
@@ -108,42 +105,27 @@ function showForm() {
   const libraryForm = document.querySelector('form.library_form');
   if(libraryForm.style.display = "none") {
     libraryForm.style.display = "block";
-  } 
-}
+  }
+  }
+
+function hideForm() {
+  const libraryForm = document.querySelector('form.library_form');
+  if(libraryForm.style.display = "block") {
+    libraryForm.style.display = "none";
+  }
+  }
 
 function showAll() {
   document.querySelector("#allBooks").innerHTML = myLibrary.map((item, i) => {
   return `<li>
-  <input class="check" type="checkbox" data-index=${i} id="item${i}" checked />
   <label for="item${i}">${item.bookTitle} by ${item.bookAuthor}</label>
-  <input type="button" data-index=${i} id="item${i}" value="delete" onclick="checkDelete()"/>
   </li>`
   }).join('');
 }
 
-function checkDelete() {
-  const checkbox = document.getElementsByClassName('check');
-  const myLibraryIndex = myLibrary.indexOf(i);
-  if(checkbox.checked = true && myLibraryIndex >= 0)  {
-    myLibrary.splice(i, 1);
-  } 
-}
-
-
-
-/*function removeBook(e) {
-  if(!e.target.matches('input.check')) return;
-
-  /*if(input.check.e.checked) {
-    myLibrary.splice(i, 1);
-  }
-
-}*/ 
-
-
-
 addButton.addEventListener('click', addBookToLibrary);
-formButton.addEventListener('click', showForm);
+formShowButton.addEventListener('click', showForm);
+formHideButton.addEventListener('click', hideForm);
 </script>
 </body>
-</html>
+</html> 
